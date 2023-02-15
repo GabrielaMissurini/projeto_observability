@@ -5,7 +5,13 @@ app = Flask(__name__)
 metrics = PrometheusMetrics(app)
 
 @app.route('/renda-fixa')
+
+#Vou construir uma métrica
+@metrics.counter('efetivacao_renda_variavel',
+                 'Número de papeis de renda fixa efetivados',
+                 labels = {'tipo':'ACOES'})
+
 def renda_fixa():
-    return render_template("lista.html", título="Renda fixa")
+    return render_template("lista.html", titulo="Renda fixa")
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
